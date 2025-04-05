@@ -34,99 +34,116 @@ function Signup() {
 	};
 
 	return (
-		<div className="flex items-center justify-center w-full">
-			<div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
-				<div className="mb-2 flex justify-center">
-					<span className="inline-block w-full max-w-[100px]">
+		<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900 px-4">
+			<div className="w-full max-w-md bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-2xl p-8 sm:p-10">
+				{/* Logo */}
+				<div className="flex justify-center mb-6">
+					<span className="inline-block w-24">
 						<Logo width="100%" />
 					</span>
 				</div>
-				<h2 className="text-center text-2xl font-bold leading-tight">
+
+				{/* Title */}
+				<h2 className="text-center text-3xl font-extrabold text-white">
 					Sign up to create an account
 				</h2>
-				<p className="mt-2 text-center text-base text-black/60">
+				<p className="mt-2 text-center text-sm text-slate-300">
 					Already have an account?&nbsp;
 					<Link
 						to="/login"
-						className="font-medium text-primary transition-all duration-200 hover:underline">
+						className="text-blue-400 hover:text-blue-300 transition underline font-medium">
 						Sign In
 					</Link>
 				</p>
+
+				{/* Error */}
 				{error && (
-					<p className="text-red-600 mt-4 text-center">{error}</p>
+					<p className="text-red-500 text-sm text-center mt-4">
+						{error}
+					</p>
 				)}
 
+				{/* Form */}
 				<form
 					onSubmit={handleSubmit(create)}
-					className="mt-6 space-y-5">
-					<Input
-						label="Full Name:"
-						placeholder="Enter your full name"
-						{...register("name", {
-							required: "Full name is required",
-						})}
-					/>
-					{errors.name && (
-						<p className="text-red-500 text-sm">
-							{errors.name.message}
-						</p>
-					)}
+					className="mt-8 space-y-6">
+					<div className="space-y-5">
+						{/* Name */}
+						<Input
+							label="Full Name"
+							placeholder="John Doe"
+							{...register("name", {
+								required: "Full name is required",
+							})}
+						/>
+						{errors.name && (
+							<p className="text-sm text-red-400">
+								{errors.name.message}
+							</p>
+						)}
 
-					<Input
-						label="Email:"
-						placeholder="Enter your email"
-						type="email"
-						{...register("email", {
-							required: "Email is required",
-							pattern: {
-								value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-								message: "Invalid email format",
-							},
-						})}
-					/>
-					{errors.email && (
-						<p className="text-red-500 text-sm">
-							{errors.email.message}
-						</p>
-					)}
+						{/* Email */}
+						<Input
+							label="Email"
+							placeholder="you@example.com"
+							type="email"
+							{...register("email", {
+								required: "Email is required",
+								pattern: {
+									value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+									message: "Invalid email format",
+								},
+							})}
+						/>
+						{errors.email && (
+							<p className="text-sm text-red-400">
+								{errors.email.message}
+							</p>
+						)}
 
-					<Input
-						label="Password:"
-						type="password"
-						placeholder="Enter your password"
-						{...register("password", {
-							required: "Password is required",
-							minLength: {
-								value: 6,
-								message:
-									"Password must be at least 6 characters",
-							},
-						})}
-					/>
-					{errors.password && (
-						<p className="text-red-500 text-sm">
-							{errors.password.message}
-						</p>
-					)}
+						{/* Password */}
+						<Input
+							label="Password"
+							placeholder="Minimum 6 characters"
+							type="password"
+							{...register("password", {
+								required: "Password is required",
+								minLength: {
+									value: 6,
+									message:
+										"Password must be at least 6 characters",
+								},
+							})}
+						/>
+						{errors.password && (
+							<p className="text-sm text-red-400">
+								{errors.password.message}
+							</p>
+						)}
 
-					<Input
-						label="Confirm Password:"
-						type="password"
-						placeholder="Confirm your password"
-						{...register("confirmPassword", {
-							required: "Please confirm your password",
-							validate: (value) =>
-								value === watch("password") ||
-								"Passwords do not match",
-						})}
-					/>
-					{errors.confirmPassword && (
-						<p className="text-red-500 text-sm">
-							{errors.confirmPassword.message}
-						</p>
-					)}
+						{/* Confirm Password */}
+						<Input
+							label="Confirm Password"
+							type="password"
+							placeholder="Re-enter password"
+							{...register("confirmPassword", {
+								required: "Please confirm your password",
+								validate: (value) =>
+									value === watch("password") ||
+									"Passwords do not match",
+							})}
+						/>
+						{errors.confirmPassword && (
+							<p className="text-sm text-red-400">
+								{errors.confirmPassword.message}
+							</p>
+						)}
+					</div>
 
-					<Button type="submit" className="w-full">
+					{/* Submit Button */}
+					<Button
+						type="submit"
+						className="w-full mt-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 rounded-lg transition disabled:opacity-50">
 						Create Account
 					</Button>
 				</form>

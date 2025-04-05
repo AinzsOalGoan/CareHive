@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import appwriteService from "../../appwrite/config";
 import Container from "../container/Container";
 import PostCard from "../../components/PostCard";
+import PostCardSkeleton from "../Loading";
 
 function AllPosts() {
 	const [allPosts, setAllPosts] = useState([]);
@@ -27,13 +28,17 @@ function AllPosts() {
 	}, []);
 
 	return (
-		<div className="w-full py-12 bg-gray-100 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+		<div className="w-full py-12 bg-gradient-to-br from-slate-600 to-slate-700 dark:from-slate-800 dark:to-slate-900 min-h-screen transition-colors duration-300">
 			<Container>
+				{/* <h1 className="text-3xl font-extrabold text-center mb-10 text-gray-900 dark:text-white">
+					All Posts
+				</h1> */}
+
 				{loading ? (
-					<div className="flex justify-center items-center min-h-[50vh]">
-						<p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-							Loading posts...
-						</p>
+					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+						{Array.from({ length: 8 }).map((_, i) => (
+							<PostCardSkeleton key={i} />
+						))}
 					</div>
 				) : error ? (
 					<div className="flex justify-center items-center min-h-[50vh]">
@@ -48,7 +53,7 @@ function AllPosts() {
 						</p>
 					</div>
 				) : (
-					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 						{allPosts.map((post) => (
 							<PostCard key={post.$id} {...post} />
 						))}

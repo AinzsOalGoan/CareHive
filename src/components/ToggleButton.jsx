@@ -1,6 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import { ThemeContext } from "./ThemeProvider";
 
+
 const RippleThemeToggle = () => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 	const rippleRef = useRef(null);
@@ -31,8 +32,22 @@ const RippleThemeToggle = () => {
 		<>
 			<button
 				onClick={handleClick}
-				className="p-2 rounded-md border dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-white relative overflow-hidden z-10">
-				 {theme === "light" ? "Dark" : "Light"}
+				className="p-2 rounded-xl text-gray-800 dark:text-white relative overflow-hidden z-10 w-10 h-10 flex items-center justify-center"
+				aria-label="Toggle Theme">
+				<span className="relative w-5 h-5">
+					<span
+						className={`absolute inset-0 transition-opacity duration-300 ${
+							theme === "light" ? "opacity-100" : "opacity-0"
+						}`}>
+						🌙
+					</span>
+					<span
+						className={`absolute inset-0 transition-opacity duration-300 ${
+							theme === "dark" ? "opacity-100" : "opacity-0"
+						}`}>
+						☀️
+					</span>
+				</span>
 			</button>
 
 			<div

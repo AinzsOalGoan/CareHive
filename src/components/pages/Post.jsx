@@ -63,7 +63,7 @@ export default function Post() {
 
 	const getFilePreview = (fileId) => {
 		if (!fileId) return "/default-placeholder.jpg"; // Show default placeholder
-		const url = `https://cloud.appwrite.io/v1/storage/files/${fileId}/preview?project=${conf.appwriteProjectId}`;
+		const url = `http://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg`;
 		console.log("Generated image preview URL:", url);
 		return url;
 	};

@@ -32,15 +32,18 @@ function App() {
 
 	if (loading) {
 		return (
-			<div className="min-h-screen flex items-center justify-center bg-gray-400">
-				<p className="text-lg font-semibold text-white">Loading...</p>
+			<div className="min-h-screen flex items-center justify-center bg-slate-700">
+				<div className="flex flex-col items-center space-y-4">
+					<div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+					<p className="text-white text-lg">Please wait...</p>
+				</div>
 			</div>
 		);
 	}
 
 	return (
 		<ThemeProvider>
-			<div className="min-h-screen flex flex-wrap content-between bg-gray-400">
+			<div className="min-h-screen flex flex-wrap content-between bg-slate-700">
 				<div className="w-full block">
 					<Header />
 					<main>

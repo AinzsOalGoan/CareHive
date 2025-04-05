@@ -1,13 +1,11 @@
 import React from "react";
 import { Container, Logo, LogoutBtn } from "../index";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ThemeToggle from "../ToggleButton";
 
 const Header = () => {
 	const authStatus = useSelector((state) => state.auth.status);
-	const navigate = useNavigate();
 
 	const navItems = [
 		{ name: "Home", slug: "/", active: true },
@@ -20,7 +18,7 @@ const Header = () => {
 	return (
 		<header className="py-3 shadow bg-gray-200 dark:bg-gray-900 transition-colors duration-300">
 			<Container>
-				<nav className="flex items-center">
+				<nav className="flex items-center justify-center">
 					{/* Logo */}
 					<div className="mr-4">
 						<Link to="/">
@@ -29,18 +27,20 @@ const Header = () => {
 					</div>
 
 					{/* Navigation Items */}
-					<ul className="flex ml-auto space-x-4">
+					<ul className="flex ml-auto justify-center space-x-4">
 						{navItems.map(
 							(item) =>
 								item.active && (
 									<li key={item.name}>
-										<button
-											onClick={() => navigate(item.slug)}
-											className="px-6 py-2 rounded-full transition duration-200 
-                                                       bg-transparent hover:bg-blue-100 dark:hover:bg-blue-700 
-                                                       text-gray-800 dark:text-gray-200">
+										<NavLink
+											to={item.slug}
+											className={({ isActive }) =>
+												` px-6 py-2 rounded-xl transition duration-200 
+												bg-transparent hover:bg-blue-100/50 dark:hover:bg-blue-700/10 
+												${isActive ? "text-blue-500" : "text-gray-800 dark:text-gray-200"}`
+											}>
 											{item.name}
-										</button>
+										</NavLink>
 									</li>
 								)
 						)}
