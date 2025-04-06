@@ -5,6 +5,8 @@ import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+
+
 function PostForm({ post }) {
 	const { register, handleSubmit, watch, setValue, control, getValues } =
 		useForm({
@@ -17,7 +19,10 @@ function PostForm({ post }) {
 		});
 
 	const navigate = useNavigate();
+
 	const userData = useSelector((state) => state.auth.userData);
+	console.log("userData:", userData);
+
 	const [previewImage, setPreviewImage] = useState(null);
 
 	// ✅ Populate form fields when editing a post
@@ -103,6 +108,9 @@ function PostForm({ post }) {
 			images: fileId || (post ? post.images : null),
 			status: data.status,
 			userid: userData.$id,
+			like: "0",
+			dislike: "0",
+			tags : null,
 		};
 
 		console.log("Final Data Sent to Appwrite:", postData);
@@ -134,7 +142,7 @@ function PostForm({ post }) {
 
 	return (
 		<form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-			<div className="w-2/3 px-2">
+			<div className="w-2/3 px-2 text-white">
 				{/* Title Input */}
 				<Input
 					label="Title :"

@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "./store/store.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/pages/Home.jsx";
-import { AuthLayout, Login, Signup } from "./components/index.js";
+import { AiChat, AuthLayout, Login, Signup } from "./components/index.js";
 
 import AllPosts from "./components/pages/AllPosts.jsx"; // Corrected import
 import AddPost from "./components/pages/AddPost";
@@ -65,7 +65,20 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/post/:slug",
-				element: <Post />,
+				element: (
+				<AuthLayout authentication={true}>
+					
+				<Post />
+				</AuthLayout>
+				)
+			},
+			{
+				path: "/aichat",
+				element: (
+					<AuthLayout authentication={true}>
+						<AiChat />
+					</AuthLayout>
+				),
 			},
 		],
 	},

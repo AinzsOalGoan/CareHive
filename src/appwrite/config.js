@@ -14,7 +14,7 @@ export class Service {
 		this.bucket = new Storage(this.client);
 	}
 
-	async createPost({ title, slug, content, images, status, userid }) {
+	async createPost({ title, slug, content, images, status, userid, like, dislike, tags }) {
 		try {
 			// Ensure slug is always present
 			if (!slug) {
@@ -36,13 +36,16 @@ export class Service {
 				images,
 				status,
 				userid,
+				like,
+				dislike,
+				tags,
 			});
 
 			return await this.databases.createDocument(
 				conf.appwriteDatabaseId,
 				conf.appwriteCollectionId,
 				slug,
-				{ title, slug, content, images, status, userid }
+				{ title, slug, content, images, status, userid, like, dislike, tags }
 			);
 		} catch (error) {
 			console.error("Appwrite service :: createPost :: error", error);

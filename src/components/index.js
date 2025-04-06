@@ -13,6 +13,8 @@ import PostCard from "./PostCard";
 import AuthLayout from "./AuthLayout";
 import Input from "./Input";
 
+import AiChat from "./pages/AiChat";
+
 export {
 	Header,
 	Footer,
@@ -28,4 +30,5 @@ export {
 	AuthLayout,
 	Input,
 	Select,
+	AiChat,
 };

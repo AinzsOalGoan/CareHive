@@ -5,7 +5,6 @@ import appwriteService from "../../appwrite/config";
 import Container from "../container/Container";
 import Button from "../Button";
 import parse from "html-react-parser";
-import conf from "../../conf/conf";
 
 export default function Post() {
 	const [post, setPost] = useState(null);
